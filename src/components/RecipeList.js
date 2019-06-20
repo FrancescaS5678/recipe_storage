@@ -35,7 +35,7 @@ class RecipeList extends Component {
                                         onClick={this.onDeleteClick.bind(this, _id)}
                                     >&times;
                                     </Button>
-                                    <h5>{name}</h5>
+                                    <div style={{marginTop: '2rem'}}><h5>{name}</h5></div>
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
