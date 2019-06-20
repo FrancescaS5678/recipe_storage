@@ -27,7 +27,7 @@ class RecipeList extends Component {
                     <TransitionGroup className="recipe-list">
                         {recipes.map(({ _id, name }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
+                                <ListGroupItem className="d-flex flex-row">
                                     <Button
                                         className='remove-btn'
                                         color="danger"
