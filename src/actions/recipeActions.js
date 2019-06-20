@@ -4,7 +4,7 @@ import { GET_RECIPES, ADD_RECIPE, DELETE_RECIPE, RECIPES_LOADING } from './types
 export const getRecipes = () => dispatch => {
     dispatch(setRecipesLoading());
     axios
-        .get('https://mysterious-earth-62439.herokuapp.com//api/recipes')
+        .get('https://mysterious-earth-62439.herokuapp.com/api/recipes')
         .then(res =>
             dispatch({
                 type: GET_RECIPES,
