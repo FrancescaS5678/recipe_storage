@@ -41,7 +41,7 @@ class RecipeModal extends Component {
         return (
             <div>
                 <Button
-                    color="dark"
+                    color="info"
                     style={{ marginBottom: '2rem' }}
                     onClick={this.toggle}
                 >Add Recipe</Button>
@@ -51,7 +51,7 @@ class RecipeModal extends Component {
                     <ModalHeader toggle={this.toggle}>Add To Recipe Storage</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
+                            <FormGroup className="d-flex flex-column">
                                 <Label for="recipe">Recipe Name</Label>
                                 <Input
                                     type="text"
@@ -60,9 +60,8 @@ class RecipeModal extends Component {
                                     placeholder="Add Recipe Name"
                                     onChange={this.onChange} />
                                 <Button
-                                    color="dark"
-                                    style={{marginTop: '2rem'}}
-                                    block>
+                                    color="info"
+                                    style={{marginTop: '2rem', marginLeft: '22rem'}}>
                                     Add Recipe</Button>
                             </FormGroup>
                         </Form>
