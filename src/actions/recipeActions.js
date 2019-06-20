@@ -1,4 +1,4 @@
-import axios from './node_modules/axios';
+import axios from 'axios';
 import { GET_RECIPES, ADD_RECIPE, DELETE_RECIPE, RECIPES_LOADING } from './types';
 
 export const getRecipes = () => dispatch => {
