@@ -36,7 +36,7 @@ class RecipeList extends Component {
                                     >&times;
                                     </Button>
                                     {name}
-                                    {instructions}
+                                    <div>{instructions}</div>
                                 </ListGroupItem>
                             </CSSTransition>
                     ))}
