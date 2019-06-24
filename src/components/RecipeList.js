@@ -36,7 +36,7 @@ class RecipeList extends Component {
                                     >&times;
                                     </Button>
                                     {name}
-                                    <div>{instructions}</div>
+                                    <div style={{marginLeft: '50px'}}>{instructions}</div>
                                 </ListGroupItem>
                             </CSSTransition>
                     ))}
