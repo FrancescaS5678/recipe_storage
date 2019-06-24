@@ -25,7 +25,7 @@ class RecipeList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="recipe-list">
-                        {recipes.map(({ _id, name }) => (
+                        {recipes.map(({ _id, name, instructions }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem className="d-flex flex-row">
                                     <Button
@@ -35,10 +35,11 @@ class RecipeList extends Component {
                                         onClick={this.onDeleteClick.bind(this, _id)}
                                     >&times;
                                     </Button>
-                                    <h5 style={{marginTop: '5px'}}>{name}</h5>
+                                    {name}
+                                    {instructions}
                                 </ListGroupItem>
                             </CSSTransition>
-                        ))}
+                    ))}
                     </TransitionGroup>
                 </ListGroup>
             </Container>

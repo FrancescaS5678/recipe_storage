@@ -15,7 +15,8 @@ import { addRecipe } from '../actions/recipeActions';
 class RecipeModal extends Component {
     state = {
         modal: false,
-        name: ''
+        name: '',
+        instructions: ''
     }
 
     toggle = () => {
@@ -25,13 +26,14 @@ class RecipeModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, [e.target.instructions]: e.target.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const newRecipe = {
-            name: this.state.name
+            name: this.state.name,
+            instructions: this.state.instructions
         };
         this.props.addRecipe(newRecipe);
         this.toggle();
@@ -59,9 +61,16 @@ class RecipeModal extends Component {
                                     id="recipe"
                                     placeholder="Add Recipe Name"
                                     onChange={this.onChange} />
+                                <Label for="recipe">Recipe Instructions</Label>
+                                <Input
+                                    type="text"
+                                    name="instructions"
+                                    id="recipe"
+                                    placeholder="Add Recipe Instructions"
+                                    onChange={this.onChange} />
                                 <Button
                                     color="info"
-                                    style={{marginTop: '2rem', marginLeft: '22rem'}}>
+                                    style={{ marginTop: '2rem', marginLeft: '22rem' }}>
                                     Add Recipe</Button>
                             </FormGroup>
                         </Form>
