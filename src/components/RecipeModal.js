@@ -43,7 +43,7 @@ class RecipeModal extends Component {
     addStep = (e) => {
         e.preventDefault()
         const data = {instructions: this.state.instructions, step: this.state.step}
-        fetch('https://mysterious-earth-62439.herokuapp.com/addrecipe', {
+        fetch('https://mysterious-earth-62439.herokuapp.com/api/recipes/addrecipe', {
             method: 'POST',
             mode: 'cors',
             headers: {
