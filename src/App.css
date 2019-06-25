@@ -23,3 +23,7 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
+
+.remove-btn{
+    padding: .05rem .5rem;
+  }
