@@ -16,8 +16,8 @@ class RecipeModal extends Component {
     state = {
         modal: false,
         name: '',
-        instructions: [],
-        step: ''
+        instructions: '',
+        // step: ''
     }
 
     toggle = () => {
@@ -27,7 +27,7 @@ class RecipeModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, [e.target.instructions]: e.target.value });
     }
 
     onSubmit = (e) => {
@@ -78,7 +78,7 @@ class RecipeModal extends Component {
                                 <Label for="recipe">Recipe Instructions</Label>
                                 <Input
                                     type="text"
-                                    name="step"
+                                    name="instructions"
                                     id="recipe"
                                     placeholder="Add Recipe Instructions"
                                     onChange={this.onChange} />
