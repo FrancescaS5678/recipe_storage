@@ -40,18 +40,18 @@ class RecipeModal extends Component {
         this.toggle();
     }
 
-    addStep = (e) => {
-        e.preventDefault()
-        const data = {instructions: this.state.instructions, step: this.state.step}
-        fetch('https://mysterious-earth-62439.herokuapp.com/api/recipes/addrecipe', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(res => this.setState({insutrctions: res}))
-    }
+    // addStep = (e) => {
+    //     e.preventDefault()
+    //     const data = {instructions: this.state.instructions, step: this.state.step}
+    //     fetch('https://mysterious-earth-62439.herokuapp.com/api/recipes/addrecipe', {
+    //         method: 'POST',
+    //         mode: 'cors',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     }).then(res => this.setState({insutrctions: res}))
+    // }
 
     render() {
         return (
@@ -82,13 +82,13 @@ class RecipeModal extends Component {
                                     id="recipe"
                                     placeholder="Add Recipe Instructions"
                                     onChange={this.onChange} />
-                                <Button
+                                {/* <Button
                                     color="info"
                                     className="btn-sm"
                                     onClick={this.addStep}
                                     style={{ marginTop: '1rem', marginRight: '27rem' }}>
                                     &#43;
-                                </Button>
+                                </Button> */}
                                 <Button
                                     color="info"
                                     style={{ marginTop: '2rem', marginLeft: '22rem' }}>
