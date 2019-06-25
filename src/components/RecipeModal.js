@@ -16,8 +16,8 @@ class RecipeModal extends Component {
     state = {
         modal: false,
         name: '',
-        instructions: '',
-        // step: ''
+        instructions: [],
+        step: ''
     }
 
     toggle = () => {
@@ -27,7 +27,7 @@ class RecipeModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, [e.target.instructions]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value });
     }
 
     onSubmit = (e) => {
@@ -38,20 +38,17 @@ class RecipeModal extends Component {
         };
         this.props.addRecipe(newRecipe);
         this.toggle();
+        this.setState({
+            name: '',
+            instructions: [],
+            step: ''
+        })
     }
 
-    // addStep = (e) => {
-    //     e.preventDefault()
-    //     const data = {instructions: this.state.instructions, step: this.state.step}
-    //     fetch('https://mysterious-earth-62439.herokuapp.com/api/recipes/addrecipe', {
-    //         method: 'POST',
-    //         mode: 'cors',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     }).then(res => this.setState({insutrctions: res}))
-    // }
+    addStep = (e) => {
+        e.preventDefault()
+        this.setState({ instructions: [...this.state.instructions, this.state.step] })
+    }
 
     render() {
         return (
@@ -59,8 +56,8 @@ class RecipeModal extends Component {
                 <Button
                     color="info"
                     style={{ marginBottom: '2rem' }}
-                    onClick={this.toggle}
-                >Add Recipe</Button>
+                    onClick={this.toggle}>
+                    Add Recipe</Button>
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}>
@@ -76,19 +73,24 @@ class RecipeModal extends Component {
                                     placeholder="Add Recipe Name"
                                     onChange={this.onChange} />
                                 <Label for="recipe">Recipe Instructions</Label>
+                                {this.state.instructions.map((text, i) => {
+                                    return <div key={i} style={{ marginBottom: '5px' }}>
+                                        {text}
+                                    </div>
+                                })}
                                 <Input
                                     type="text"
-                                    name="instructions"
+                                    name="step"
                                     id="recipe"
                                     placeholder="Add Recipe Instructions"
                                     onChange={this.onChange} />
-                                {/* <Button
+                                <Button
                                     color="info"
                                     className="btn-sm"
                                     onClick={this.addStep}
                                     style={{ marginTop: '1rem', marginRight: '27rem' }}>
                                     &#43;
-                                </Button> */}
+                                </Button>
                                 <Button
                                     color="info"
                                     style={{ marginTop: '2rem', marginLeft: '22rem' }}>

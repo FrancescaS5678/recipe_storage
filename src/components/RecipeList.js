@@ -5,14 +5,23 @@ import {
     ListGroupItem,
     Button
 } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getRecipes, deleteRecipes } from '../actions/recipeActions';
 import PropTypes from 'prop-types';
 
 class RecipeList extends Component {
+    state = {
+        modal: false
+    }
+
     componentDidMount = () => {
         this.props.getRecipes();
+    }
+
+    toggle = () => {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     onDeleteClick = (id) => {
@@ -24,23 +33,25 @@ class RecipeList extends Component {
         return (
             <Container>
                 <ListGroup>
-                    <TransitionGroup className="recipe-list">
-                        {recipes.map(({ _id, name, instructions }) => (
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem className="d-flex flex-row">
-                                    <Button
-                                        className='remove-btn'
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}
-                                    >&times;
-                                    </Button>
-                                    {name}
-                                    <div style={{marginLeft: '50px'}}>{instructions}</div>
-                                </ListGroupItem>
-                            </CSSTransition>
+                    {recipes.map(({ _id, name, instructions }) => (
+                        <div key={_id}>
+                            <ListGroupItem>
+                                <Button
+                                    className='remove-btn'
+                                    color="danger"
+                                    size="sm"
+                                    onClick={this.onDeleteClick.bind(this, _id)}
+                                >&times;
+                            </Button>
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                {name}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                {instructions}
+                            </ListGroupItem>
+                        </div>
                     ))}
-                    </TransitionGroup>
                 </ListGroup>
             </Container>
         )
