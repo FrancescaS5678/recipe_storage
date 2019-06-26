@@ -11,8 +11,8 @@ import EditRecipeModal from './EditRecipeModal';
 import PropTypes from 'prop-types';
 
 class RecipeList extends Component {
-    componentDidMount = async () => {
-        await this.props.getRecipes();
+    componentDidMount = () => {
+        this.props.getRecipes();
     }
 
     onDeleteClick = (id) => {

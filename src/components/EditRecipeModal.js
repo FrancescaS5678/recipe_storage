@@ -40,7 +40,8 @@ class EditRecipeModal extends Component {
             name: this.state.name,
             instructions: this.state.instructions
         }
-        fetch(`http://localhost:4000/api/recipes/${this.props.id}`, {
+        fetch(`https://mysterious-earth-62439.herokuapp.comapi/recipes/${this.props.id}`, {
+        // fetch(`http://localhost:4000/api/recipes/${this.props.id}`, {
             method: 'PUT',
             body: JSON.stringify(updatedRecipe),
             headers: {
