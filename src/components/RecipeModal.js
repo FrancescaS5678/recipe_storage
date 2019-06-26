@@ -94,7 +94,7 @@ class RecipeModal extends Component {
                                 </Button>
                                 <Button
                                     color="info"
-                                    style={{ marginTop: '2rem', marginLeft: '22rem' }}>
+                                    style={{ marginTop: '2rem', marginLeft: '21rem' }}>
                                     Add Recipe</Button>
                             </FormGroup>
                         </Form>
