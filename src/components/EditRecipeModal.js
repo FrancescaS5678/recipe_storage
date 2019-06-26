@@ -14,8 +14,8 @@ import PropTypes from 'prop-types';
 class EditRecipeModal extends Component {
     state = {
         modal: false,
-        name: '',
-        instructions: [],
+        name: this.props.name,
+        instructions: this.props.instructions,
         step: ''
     }
 
@@ -32,6 +32,29 @@ class EditRecipeModal extends Component {
     addStep = (e) => {
         e.preventDefault()
         this.setState({ instructions: [...this.state.instructions, this.state.step] })
+        console.log(this.state.instructions)
+    }
+
+    onSubmit = (e) => {
+        const updatedRecipe = {
+            name: this.state.name,
+            instructions: this.state.instructions
+        }
+        fetch(`http://localhost:4000/api/recipes/${this.props.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedRecipe),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error));
+        this.toggle();
+        this.setState({
+            name: '',
+            instructions: [],
+            step: ''
+        })
     }
 
     render() {
@@ -46,7 +69,7 @@ class EditRecipeModal extends Component {
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{this.props.name}</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>{this.state.name}</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup className="d-flex flex-column">
@@ -58,8 +81,8 @@ class EditRecipeModal extends Component {
                                     placeholder={this.props.name}
                                     onChange={this.onChange} />
                                 <Label for="recipe">Recipe Instructions</Label>
-                                {this.props.instructions.map((text, i) => {
-                                    return <div key={i} style={{ marginBottom: '5px' }}>
+                                {this.state.instructions.map((text, i) => {
+                                    return <div data-steps={i} key={i} style={{ marginBottom: '5px' }}>
                                         {text}
                                     </div>
                                 })}
@@ -76,6 +99,10 @@ class EditRecipeModal extends Component {
                                     style={{ marginTop: '1rem', marginRight: '27rem' }}>
                                     &#43;
                                 </Button>
+                                <Button
+                                    color="info"
+                                    style={{ marginTop: '2rem', marginLeft: '20rem' }}>
+                                    Update Recipe</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
@@ -87,7 +114,8 @@ class EditRecipeModal extends Component {
 
 EditRecipeModal.propTypes = {
     name: PropTypes.string.isRequired,
-    instructions: PropTypes.array.isRequired
+    instructions: PropTypes.array.isRequired,
+    id: PropTypes.string.isRequired
 }
 
-export default EditRecipeModal
+export default EditRecipeModal;

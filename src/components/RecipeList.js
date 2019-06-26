@@ -11,8 +11,8 @@ import EditRecipeModal from './EditRecipeModal';
 import PropTypes from 'prop-types';
 
 class RecipeList extends Component {
-    componentDidMount = () => {
-        this.props.getRecipes();
+    componentDidMount = async () => {
+        await this.props.getRecipes();
     }
 
     onDeleteClick = (id) => {
@@ -26,22 +26,27 @@ class RecipeList extends Component {
                 <ListGroup>
                     {recipes.map(({ _id, name, instructions }) => (
                         <div key={_id}>
-                            <ListGroupItem>
-                                {instructions !== null ? <EditRecipeModal name={name} instructions={instructions} /> : null}
-                                <Button
-                                    className='remove-btn'
-                                    color="danger"
-                                    size="sm"
-                                    onClick={this.onDeleteClick.bind(this, _id)}
-                                >&times;
-                                </Button>
+                            <ListGroupItem style={{ display: 'flex' }}>
+                                {instructions !== null ? <EditRecipeModal name={name} instructions={instructions} id={_id} /> : null}
+                                <div>
+                                    <Button
+                                        className='remove-btn'
+                                        color="danger"
+                                        size="sm"
+                                        onClick={this.onDeleteClick.bind(this, _id)}
+                                        style={{ marginLeft: '7px' }}
+                                    >&times;
+                                    </Button>
+                                </div>
+                                <div style={{ paddingTop: '4px' }}>
+                                    <h4>{name}</h4>
+                                </div>
                             </ListGroupItem>
-                            <ListGroupItem>
-                                {name}
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                {instructions}
-                            </ListGroupItem>
+                            {instructions.map((instruction, i) => {
+                                return <ListGroupItem data-steps={i} key={i} style={{ display: 'block' }}>
+                                    {instruction}
+                                </ListGroupItem>
+                            })}
                         </div>
                     ))}
                 </ListGroup>

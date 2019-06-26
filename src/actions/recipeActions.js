@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_RECIPES, ADD_RECIPE, DELETE_RECIPE, RECIPES_LOADING, UPDATE_RECIPE } from './types';
+import { GET_RECIPES, ADD_RECIPE, DELETE_RECIPE, RECIPES_LOADING } from './types';
 
 export const getRecipes = () => dispatch => {
     dispatch(setRecipesLoading());
@@ -22,18 +22,6 @@ export const addRecipe = (recipe) => dispatch => {
             dispatch({
                 type: ADD_RECIPE,
                 payload: res.data
-            })
-        )
-};
-
-export const updateRecipe = (id) => dispatch => {
-    axios
-        // .post(`https://mysterious-earth-62439.herokuapp.com/api/recipes/${id}`)
-        .put(`http://localhost:4000/api/recipes/${id}`)
-        .then(res =>
-            dispatch({
-                type: UPDATE_RECIPE,
-                payload: id
             })
         )
 };
