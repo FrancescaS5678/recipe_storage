@@ -49,6 +49,7 @@ class RecipeModal extends Component {
     addStep = (e) => {
         e.preventDefault()
         this.setState({ instructions: [...this.state.instructions, this.state.step] })
+        document.getElementById("inputStep").value = ""
     }
 
     render() {
@@ -77,12 +78,23 @@ class RecipeModal extends Component {
                                 {this.state.instructions.map((text, i) => {
                                     return <div key={i} style={{ marginBottom: '5px' }}>
                                         {text}
+                                        <Button
+                                            className='remove-btn'
+                                            color="danger"
+                                            size="sm"
+                                            onClick={i => {
+                                                this.state.instructions.splice(i, 1)
+                                                this.forceUpdate()
+                                            }}
+                                            style={{ marginLeft: '7px' }}
+                                        >&times;
+                                        </Button>
                                     </div>
                                 })}
                                 <Input
                                     type="text"
                                     name="step"
-                                    id="recipe"
+                                    id="inputStep"
                                     placeholder="Add Recipe Instructions"
                                     onChange={this.onChange} />
                                 <Button

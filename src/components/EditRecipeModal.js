@@ -32,7 +32,7 @@ class EditRecipeModal extends Component {
     addStep = (e) => {
         e.preventDefault()
         this.setState({ instructions: [...this.state.instructions, this.state.step] })
-        console.log(this.state.instructions)
+        document.getElementById("inputStep").value = ""
     }
 
     onSubmit = (e) => {
@@ -40,8 +40,8 @@ class EditRecipeModal extends Component {
             name: this.state.name,
             instructions: this.state.instructions
         }
-        fetch(`https://mysterious-earth-62439.herokuapp.comapi/recipes/${this.props.id}`, {
-        // fetch(`http://localhost:4000/api/recipes/${this.props.id}`, {
+        // fetch(`https://mysterious-earth-62439.herokuapp.comapi/recipes/${this.props.id}`, {
+        fetch(`http://localhost:5000/api/recipes/${this.props.id}`, {
             method: 'PUT',
             body: JSON.stringify(updatedRecipe),
             headers: {
@@ -85,6 +85,17 @@ class EditRecipeModal extends Component {
                                 {this.state.instructions.map((text, i) => {
                                     return <div data-steps={i} key={i} style={{ marginBottom: '5px' }}>
                                         {text}
+                                        <Button
+                                            className='remove-btn'
+                                            color="danger"
+                                            size="sm"
+                                            onClick={i => {
+                                                this.state.instructions.splice(i, 1)
+                                                this.forceUpdate()
+                                            }}
+                                            style={{ marginLeft: '7px' }}
+                                        >&times;
+                                        </Button>
                                     </div>
                                 })}
                                 <Input
