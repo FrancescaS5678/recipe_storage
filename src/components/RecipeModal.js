@@ -18,7 +18,9 @@ class RecipeModal extends Component {
         modal: false,
         name: '',
         instructions: [],
-        step: ''
+        step: '',
+        ingredients: [],
+        ingredient: ''
     }
 
     toggle = () => {
@@ -28,22 +30,31 @@ class RecipeModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value, [e.target.ingredient]: e.target.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const newRecipe = {
             name: this.state.name,
-            instructions: this.state.instructions
+            instructions: this.state.instructions,
+            ingredients: this.state.ingredients
         };
         this.props.addRecipe(newRecipe);
         this.toggle();
         this.setState({
             name: '',
             instructions: [],
-            step: ''
+            step: '',
+            ingredients: [],
+            ingredient: ''
         })
+    }
+
+    addIngredient = (e) => {
+        e.preventDefault()
+        this.setState({ ingredients: [...this.state.ingredients, this.state.ingredient] })
+        document.getElementById("inputIngredient").value = ""
     }
 
     addStep = (e) => {
@@ -74,6 +85,36 @@ class RecipeModal extends Component {
                                     id="recipe"
                                     placeholder="Add Recipe Name"
                                     onChange={this.onChange} />
+                                <Label for="recipe">Recipe Ingredients</Label>
+                                {this.state.ingredients.map((text, i) => {
+                                    return <div key={i} style={{ marginBottom: '5px' }}>
+                                        {text}
+                                        <Button
+                                            className='remove-btn'
+                                            color="danger"
+                                            size="sm"
+                                            onClick={i => {
+                                                this.state.ingredients.splice(i, 1)
+                                                this.forceUpdate()
+                                            }}
+                                            style={{ marginLeft: '7px' }}
+                                        >&times;
+                                        </Button>
+                                    </div>
+                                })}
+                                <Input
+                                    type="text"
+                                    name="ingredient"
+                                    id="inputIngredient"
+                                    placeholder="Add Recipe Ingredients"
+                                    onChange={this.onChange} />
+                                <Button
+                                    color="info"
+                                    className="btn-sm"
+                                    onClick={this.addIngredient}
+                                    style={{ marginTop: '1rem', marginRight: '27rem', marginBottom: '1rem' }}>
+                                    &#43;
+                                </Button>
                                 <Label for="recipe">Recipe Instructions</Label>
                                 {this.state.instructions.map((text, i) => {
                                     return <div key={i} style={{ marginBottom: '5px' }}>

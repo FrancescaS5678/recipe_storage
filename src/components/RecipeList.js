@@ -24,10 +24,10 @@ class RecipeList extends Component {
         return (
             <Container>
                 <ListGroup>
-                    {recipes.map(({ _id, name, instructions }) => (
+                    {recipes.map(({ _id, name, instructions, ingredients }) => (
                         <div key={_id}>
                             <ListGroupItem style={{ display: 'flex' }}>
-                                {instructions !== null ? <EditRecipeModal name={name} instructions={instructions} id={_id} /> : null}
+                                {instructions !== null ? <EditRecipeModal name={name} instructions={instructions} id={_id} ingredients={ingredients} /> : null}
                                 <div>
                                     <Button
                                         className='remove-btn'
@@ -41,6 +41,13 @@ class RecipeList extends Component {
                                 <div style={{ paddingTop: '4px' }}>
                                     <h4>{name}</h4>
                                 </div>
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                {ingredients.map((ingredients, i) => {
+                                    return <div data-ingredient={i} key={i}>
+                                        {ingredients}
+                                    </div>
+                                })}
                             </ListGroupItem>
                             {instructions.map((instruction, i) => {
                                 return <ListGroupItem data-steps={i} key={i} style={{ display: 'block' }}>

@@ -16,7 +16,9 @@ class EditRecipeModal extends Component {
         modal: false,
         name: this.props.name,
         instructions: this.props.instructions,
-        step: ''
+        step: '',
+        ingredients: this.props.ingredients,
+        ingredient: ''
     }
 
     toggle = () => {
@@ -26,7 +28,13 @@ class EditRecipeModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, [e.target.step]: e.target.value, [e.target.ingredient]: e.target.value });
+    }
+
+    addIngredient = (e) => {
+        e.preventDefault()
+        this.setState({ ingredients: [...this.state.ingredients, this.state.ingredient] })
+        document.getElementById("inputIngredient").value = ""
     }
 
     addStep = (e) => {
@@ -38,7 +46,8 @@ class EditRecipeModal extends Component {
     onSubmit = (e) => {
         const updatedRecipe = {
             name: this.state.name,
-            instructions: this.state.instructions
+            instructions: this.state.instructions,
+            ingredients: this.state.ingredients
         }
         // fetch(`https://mysterious-earth-62439.herokuapp.comapi/recipes/${this.props.id}`, {
         fetch(`http://localhost:5000/api/recipes/${this.props.id}`, {
@@ -54,7 +63,9 @@ class EditRecipeModal extends Component {
         this.setState({
             name: '',
             instructions: [],
-            step: ''
+            step: '',
+            ingredients: [],
+            ingredient: ''
         })
     }
 
@@ -81,6 +92,38 @@ class EditRecipeModal extends Component {
                                     id="recipe"
                                     placeholder={this.props.name}
                                     onChange={this.onChange} />
+
+                                <Label for="recipe">Recipe Ingredients</Label>
+                                {this.state.ingredients.map((text, i) => {
+                                    return <div data-steps={i} key={i} style={{ marginBottom: '5px' }}>
+                                        {text}
+                                        <Button
+                                            className='remove-btn'
+                                            color="danger"
+                                            size="sm"
+                                            onClick={i => {
+                                                this.state.ingredients.splice(i, 1)
+                                                this.forceUpdate()
+                                            }}
+                                            style={{ marginLeft: '7px' }}
+                                        >&times;
+                                        </Button>
+                                    </div>
+                                })}
+                                <Input
+                                    type="text"
+                                    name="ingredient"
+                                    id="inputIngredient"
+                                    placeholder="Add Recipe Ingredients"
+                                    onChange={this.onChange} />
+                                <Button
+                                    color="info"
+                                    className="btn-sm"
+                                    onClick={this.addStep}
+                                    style={{ marginTop: '1rem', marginRight: '27rem' }}>
+                                    &#43;
+                                </Button>
+
                                 <Label for="recipe">Recipe Instructions</Label>
                                 {this.state.instructions.map((text, i) => {
                                     return <div data-steps={i} key={i} style={{ marginBottom: '5px' }}>
@@ -101,7 +144,7 @@ class EditRecipeModal extends Component {
                                 <Input
                                     type="text"
                                     name="step"
-                                    id="recipe"
+                                    id="inputStep"
                                     placeholder="Add Recipe Instructions"
                                     onChange={this.onChange} />
                                 <Button
@@ -127,7 +170,8 @@ class EditRecipeModal extends Component {
 EditRecipeModal.propTypes = {
     name: PropTypes.string.isRequired,
     instructions: PropTypes.array.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    ingredients: PropTypes.array.isRequired
 }
 
 export default EditRecipeModal;
