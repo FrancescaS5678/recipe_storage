@@ -118,11 +118,10 @@ class EditRecipeModal extends Component {
                                 <Button
                                     color="info"
                                     className="btn-sm"
-                                    onClick={this.addStep}
-                                    style={{ marginTop: '1rem', marginRight: '27rem' }}>
+                                    onClick={this.addIngredient}
+                                    style={{ marginTop: '1rem', marginRight: 'auto', marginBottom: '1rem' }}>
                                     &#43;
                                 </Button>
-
                                 <Label for="recipe">Recipe Instructions</Label>
                                 {this.state.instructions.map((text, i) => {
                                     return <div data-steps={i} key={i} style={{ marginBottom: '5px' }}>
@@ -150,12 +149,12 @@ class EditRecipeModal extends Component {
                                     color="info"
                                     className="btn-sm"
                                     onClick={this.addStep}
-                                    style={{ marginTop: '1rem', marginRight: '27rem' }}>
+                                    style={{ marginTop: '1rem', marginRight: 'auto' }}>
                                     &#43;
                                 </Button>
                                 <Button
                                     color="info"
-                                    style={{ marginTop: '2rem', marginLeft: '20rem' }}>
+                                    style={{ marginTop: '2rem', marginLeft: 'auto' }}>
                                     Update Recipe</Button>
                             </FormGroup>
                         </Form>

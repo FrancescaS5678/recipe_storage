@@ -23,13 +23,3 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
-
-/* .sng-rec {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.item {
-    flex-grow: 1;
-} */

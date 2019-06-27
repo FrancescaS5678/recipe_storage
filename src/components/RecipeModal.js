@@ -112,7 +112,7 @@ class RecipeModal extends Component {
                                     color="info"
                                     className="btn-sm"
                                     onClick={this.addIngredient}
-                                    style={{ marginTop: '1rem', marginRight: '27rem', marginBottom: '1rem' }}>
+                                    style={{ marginTop: '1rem', marginRight: 'auto', marginBottom: '1rem' }}>
                                     &#43;
                                 </Button>
                                 <Label for="recipe">Recipe Instructions</Label>
@@ -142,12 +142,12 @@ class RecipeModal extends Component {
                                     color="info"
                                     className="btn-sm"
                                     onClick={this.addStep}
-                                    style={{ marginTop: '1rem', marginRight: '27rem' }}>
+                                    style={{ marginTop: '1rem', marginRight: 'auto' }}>
                                     &#43;
                                 </Button>
                                 <Button
                                     color="info"
-                                    style={{ marginTop: '2rem', marginLeft: '21rem' }}>
+                                    style={{ marginTop: '2rem', marginLeft: 'auto' }}>
                                     Add Recipe</Button>
                             </FormGroup>
                         </Form>
